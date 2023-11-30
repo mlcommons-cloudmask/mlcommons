@@ -1,10 +1,13 @@
 # How to run hdf_visualizer.ipynb
 
-This notebook can be divided into 4 parts: Visualize HDF5 Files, Search & Download using EUMDAC API, Extract Geo-Coordinates, Folium Map Generator.
+This notebook can be divided into 4 parts: Visualize HDF5 Files, 
+Search & Download using EUMDAC API, Extract Geo-Coordinates, Folium Map 
+Generator.
 
 ## Part 0: Python Packages
 
-This program uses several packages. Make sure you have those ready before running the notebook.
+This program uses several packages. Make sure you have those ready before 
+running the notebook.
 
 ```bash
 source ~/ENV3/bin/activate
@@ -18,11 +21,13 @@ pip install selenium
 
 ## Part ONE: Visualize HDF5 Files
 
-This part is straightforward. It takes directory path as input and generate a dataframe and subplot of 10*10 matrices as output.
+This part is straightforward. It takes directory path as input and generate a 
+dataframe and subplot of 10*10 matrices as output.
 
 ### Input: (Cell #3) data_path1, data_path2
 
-* Here the program takes two directories containing day and night inference hdf5 files as data_path1, data_path2, respectively
+* Here the program takes two directories containing day and night inference 
+* hdf5 files as data_path1, data_path2, respectively
 * Make sure to adjust the path accordingly; that's all you need to do here
 
 ### Output1: (dataframe) inference_df
@@ -49,9 +54,13 @@ The token would auto refresh.
 
 ### Adjust Your Working Directory
 
-* Part TWO will create a directory named: 'ssts-additional-info/' on your current working dir. Make sure this dir does not already exist.
-* Under 'ssts-additional-info/', 100 directories will be further created for each inference hdf files to store two files: xfdumanifest.xml (which contains geo-coordinates), browse.jpg (raw image)
-* After one SUCCESSFUL execution of Part TWO, there is no need to rerun this part. 
+* Part TWO will create a directory named: 'ssts-additional-info/' on your 
+* current working dir. Make sure this dir does not already exist.
+* Under 'ssts-additional-info/', 100 directories will be further created for 
+* each inference hdf files to store two files: xfdumanifest.xml (which 
+* contains geo-coordinates), browse.jpg (raw image)
+* After one SUCCESSFUL execution of Part TWO, there is no need to rerun 
+* this part. 
 
 ## Part THREE: Extract Geo-Coordinates
 
@@ -62,4 +71,5 @@ There is nothing you need to change in this part. Just run. ;-)
 There is again nothing you need to change in this part. Just run. ;-)
 
 Note: This part will take quite a while.
-After execution is done, a folium map (framed with geo-coordinates) will be created and save to the 100 folders in 'ssts-additional-info/'
+After execution is done, a folium map (framed with geo-coordinates) will be 
+created and save to the 100 folders in 'ssts-additional-info/'
