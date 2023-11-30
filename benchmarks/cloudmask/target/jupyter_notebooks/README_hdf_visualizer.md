@@ -85,12 +85,12 @@ TBD ???
 ### Adjust Your Working Directory
 
 * Part TWO will create a directory named: 'ssts-additional-info/' on your 
-* current working dir. Make sure this dir does not already exist.
-* Under 'ssts-additional-info/', 100 directories will be further created for 
-* each inference hdf files to store two files: xfdumanifest.xml (which 
-* contains geo-coordinates), browse.jpg (raw image)
-* After one SUCCESSFUL execution of Part TWO, there is no need to rerun 
-* this part. 
+  current working dir. Make sure this dir does not already exist.
+  Under 'ssts-additional-info/', 100 directories will be further created for 
+  each inference hdf files to store two files: xfdumanifest.xml (which 
+  contains geo-coordinates), browse.jpg (raw image)
+  After one SUCCESSFUL execution of Part TWO, there is no need to rerun 
+  this part. 
 
 ## Part THREE: Extract Geo-Coordinates
 
