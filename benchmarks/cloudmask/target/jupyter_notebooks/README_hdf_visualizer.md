@@ -40,17 +40,47 @@ inference_df is the main dataframe throughout this notebook.
 
 ## Part TWO: Search & Download using EUMDAC API
 
-Before diving in, make sure you have register an account at EUMETSAT (https://data.eumetsat.int/data/map/EO:EUM:DAT:0615?start=2020-02-15T22:29:06.913Z&end=2020-02-16T22:29:06.913Z&sort=start,time,0), as you will need api token to download data.
+Before diving in, make sure you have register an account at 
+[EUMETSAT](https://data.eumetsat.int/data/map/EO:EUM:DAT:0615?start=2020-02-15T22:29:06.913Z&end=2020-02-16T22:29:06.913Z&sort=start,time,0), as you will need api token to download data.
+
+Follow the instructions to create a new account
+
+Now login with your username and password
+
+
+
+
 
 ### API Token (Cell #2 of Part TWO)
 
-You will need to adjust the following fields:
+Gte the API key from 
+
+<https://api.eumetsat.int/api-key/>
+
+
+export ESAT="~/esat"
+
+You will need to copy the following fields to your computer
 
 * consumer_key
 * consumer_secret
 
+store them in the files 
+
+mkdir $ESAT
+$ESAT/.consumer_key
+$ESAT/.consumer_secret
+
 You can find these information after you logged in.
 The token would auto refresh.
+
+mkdir $ESAT/data
+
+### download needed files
+
+TBD ???
+
+
 
 ### Adjust Your Working Directory
 
@@ -64,11 +94,11 @@ The token would auto refresh.
 
 ## Part THREE: Extract Geo-Coordinates
 
-There is nothing you need to change in this part. Just run. ;-)
+There is nothing you need to change in this part. Just run. 
 
 ## Part FOUR: Folium Map Generator
 
-There is again nothing you need to change in this part. Just run. ;-)
+There is again nothing you need to change in this part. Just run.
 
 Note: This part will take quite a while.
 After execution is done, a folium map (framed with geo-coordinates) will be 
