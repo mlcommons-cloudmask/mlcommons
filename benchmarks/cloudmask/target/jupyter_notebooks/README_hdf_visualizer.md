@@ -22,16 +22,12 @@ accordingly.
 This program requires the instalation of the following packages. 
 
 ```bash
-pip install h5py
-pip install astral
-pip install plotly
-pip install eumdac
-pip install folium
-pip install selenium
+pip install jupyterlab
+pip install jupyter
 ```
 
-TODO: The requirements are included in the ipython notebook in the first few 
-cells. 
+The rest of the requirements are included in the ipython notebook 
+in the first few cells. 
 
 ## 2. Visualize HDF5 Files
 
