@@ -1,6 +1,8 @@
 # Greene Versions
+
 * **greene**:
-The version worked on by NYU team (Varshitha). Last modification dates back to July 2023.
+The version worked on by NYU team (Varshitha). Last modification dates back to 
+July 2023. This version is no longer supported as Greenes software stack was changed and the program has not been updated.
 * **greene_v0.5**:
 The main version where new modifications are made and experimented on Greene.
 * **greene_v1**
