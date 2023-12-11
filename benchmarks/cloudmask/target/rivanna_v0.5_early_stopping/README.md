@@ -1,8 +1,11 @@
-# Cloudmask v0.5
+# Cloudmask Rivanna v0.5 with Eraly Stopping 
 
-This documentation contains the cloudmask v0.5 documentation.
-It is a significant improvement over an earlier project that was conducted
-at NYU.
+This documentation contains the cloudmask v0.5 documentation with early stopping. It is a significant improvement over an earlier project that was conducted at NYU and includes
+
+1. switch to cloudmesh-ee 
+2. better use of cloudmesh YAML files
+3. improved SLURM scripts
+4. some cleanup of code and documentation
 
 Here we use the cloumesh Execute Coordinator (cloudmesh-ee) to manage
 parameterized runs of the cloudmask code. This significantly improves 
@@ -10,18 +13,13 @@ readability of the code, but also adheres to the FAIR principle as
 cloudmesh-ee creates for each run its own copy of the code into directory 
 where all output files are written. Thus, all runs are embarrisingly 
 parallel and can be executed easily by a queuing system.
+Please note that cloudmesh-ee was available prior to NYU's effort but the team did not to use it.
 
-Cloudmesh-ee was available prior to NYU's effort but the team did not
-to use it.
+The work here will allow the code to be used on machines that support singularity. However bare metal ports can easily be achieved by adapting the slurm scripts accordingly.
 
-The work here will allow the code ti be used on UVA rivanna as well as on 
-NYU Greene. THe setup for the machines are slightly different espacially 
-as NYU uses overlays while on Rivanna we do not need to do that.
+We discuss setting up and running the code on the different machines. Please note not to modify `config.in.yaml` but instead 
 
-We discuss setting up and running the code on the different machines. please note not to modify `config.in.yaml` but instead 
-
-* `config-rivanna.in.yaml` or 
-* `config-grene.in.yaml`
+* `config-rivanna.in.yaml` 
 
 So we can maintain compatibility across the machines.
 
@@ -105,7 +103,7 @@ b1>
 
 We have created a benchmark template that has the same hyperparameters and
 only distinguishes itself from different locations for the data, programs,
-and the use of singularity overlays in case of greene.
+and the use of singularity.
 
 To run it for rivanna please use
 
@@ -185,7 +183,7 @@ Account](https://www.nyu.edu/life/information-technology/research-computing-serv
 ## Set-up Git
 
 ```bash
-greene> 
+rivanna> 
   git config pull.rebase false
   git config --global user.name "FIRST_NAME LAST_NAME"
   git config --global user.email "MY_NAME@example.com"
@@ -195,7 +193,7 @@ greene>
 ## Get Interactive node and login
 
 ```bash
-greene> 
+rivanna> 
   srun --gres=gpu:v100:1 --pty --mem=64G --time 02:00:00 /bin/bash
 ```
 
@@ -210,7 +208,7 @@ node>
   export USER_SCRATCH=/scratch/$USER/github
   export PROJECT_DIR=$USER_SCRATCH/mlcommons/benchmarks/cloudmask
   export PROJECT_DATA=$USER_SCRATCH/data
-  export TARGET=$PROJECT_DIR/target/greene_v0.5
+  export TARGET=$PROJECT_DIR/target/rivanna_v0.5_early_stopping
   
   mkdir -p $USER_SCRATCH
   mkdir -p $PROJECT_DATA
@@ -223,13 +221,12 @@ node>
   cd $PROJECT_DIR
 ```
 
-## Set-up Python
+## Set-up Python (in case you like to use anaconda)
 
 ```bash
 node> 
   module purge
 
-  # on greene node
   module load anaconda3/2020.07
   module load cudnn/8.6.0.163-cuda11
   
@@ -242,12 +239,10 @@ node>
   time conda create -p $USER_SCRATCH/python310 python=3.10 -y
 
   # TODO: write down the time iit takes
-  # greene:
   # rivanna:  2m10.665s
   
   source activate $USER_SCRATCH/python310
   time python3 -m venv $USER_SCRATCH/ENV3
-  # greene:
   # rivanna: real	0m5.526s
   
   conda deactivate
@@ -281,7 +276,6 @@ node>
   cd $TARGET
   time make requirements
 
-  # greene:
   # rivanna: real	2m2.626s
 ```
 
@@ -307,32 +301,24 @@ rivanna>
 ```
 
 
-## Run an example to see if it works
+## Run an example to see if it works (deprecated)
 
 
 ```bash
-greene> 
+rivanna> 
   cd $TARGET
   mkdir -p outputs
   sbatch simple.slurm
   squeue -u $USER
 ```
 
-## Reproduce Experiments
 
-This will create multiple copies of config_simple.yaml, simple.slurm and the output log files.
-
-```bash
-greene> 
-  bash reproduce_experiments.sh
-```
-
-## Visualize results
+## Visualize results (deprecated)
 
 To visualize the graphs, pass the paths to the log files as the arguments while running the file visualizer.py. You can pass along a single experiment log files or combine all of them and then pass them as inputs.
 
 ```bash
-greene>
+rivanna>
   cat cloudmask_200* >> cloudmask_200.log
   cat mlperf_cloudmask_200* >> mlperf_cloudmask_200.log
   python3 visualizer.py mlperf_cloudmask_200.log cloudmask_200.log
@@ -343,7 +329,7 @@ greene>
 To kill all jobs in the queue, please use
 
 ```bash
-greene>
+rivanna>
     squeue -u $USER -h | awk '{print $1}' | xargs scancel
 ```
 
