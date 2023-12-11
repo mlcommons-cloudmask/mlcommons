@@ -26,8 +26,6 @@ Description:
     consecutive itterations over time will show that view. Only if another char is pressed the
     view will be changed.
 
-    current draft:
-    https://github.com/laszewsk/mlcommons/blob/main/benchmarks/cloudmask/target/greene_v0.5/bin/s.py
 
 """
 

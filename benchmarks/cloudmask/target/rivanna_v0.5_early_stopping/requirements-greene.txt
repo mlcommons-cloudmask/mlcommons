@@ -1,3 +1,0 @@
-cloudmesh-common
-cloudmesh-rivanna
-cloudmesh-ee

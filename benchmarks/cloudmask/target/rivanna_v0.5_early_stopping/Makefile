@@ -13,9 +13,6 @@ all: requirements data
 requirements:
 	pip install -r requirements.txt
 
-yaml:
-	sed -i 's/USERTOREPLACE/$(USER)/g' $(PROJECT_DIR)/experiments/greene/config.yaml
-
 
 data:
 	mkdir -p $(PROJECT_DATA)/ssts
@@ -40,10 +37,6 @@ cp-rivanna-yaml:
 project-rivanna: cp-rivanna-yaml project submit status
 
 test-rivanna: cp-test-yaml project submit status
-
-project-greene:
-	cp config-greene.in.yaml config.in.yaml
-	make -f Makefile project
 
 clean-project:
 	rm -rf project
@@ -96,7 +89,6 @@ summary:
 realclean:
 	@-rm -rf localscratch localscratch.json jobs-localscratch.sh
 	@-rm -rf project project.json jobs-project.sh
-	@-rm -f greene.slurm
 	@-rm -rf '__pycache__'
 	@-rm -rf *~
 
@@ -136,10 +128,6 @@ install-local:
 
 image-rivanna:
 	cms rivanna singularity build image-singularity/${NAME}.def
-
-
-image-greene:
-	singularity build image-singularity/${NAME}.def ${NAME}.sif
 
 image:
 	cd image-singularity; make image
