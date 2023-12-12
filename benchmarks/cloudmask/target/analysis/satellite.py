@@ -278,26 +278,27 @@ def get_filenames(directory_path):
 
 
 
-sentinel = Sentinel()
-sentinel.credentials()
+if __name__ == "__main__":
+    sentinel = Sentinel()
+    sentinel.credentials()
 
-DATA_DIR = environment.DATA_DIR
+    DATA_DIR = environment.DATA_DIR
 
-print ("DATA_DIR", DATA_DIR)
-
-
-files = []
+    print ("DATA_DIR", DATA_DIR)
 
 
-for directory in [f'{DATA_DIR}/ssts/day', f'{DATA_DIR}/ssts/night']:
-     dir_files = get_filenames(directory)
-     files = files + dir_files
+    files = []
 
-pprint(files)
 
-sentinel.add_files(files)
+    for directory in [f'{DATA_DIR}/ssts/day', f'{DATA_DIR}/ssts/night']:
+         dir_files = get_filenames(directory)
+         files = files + dir_files
 
-print(sentinel.df)
+    pprint(files)
+
+    sentinel.add_files(files)
+
+    print(sentinel.df)
 
 #
 
