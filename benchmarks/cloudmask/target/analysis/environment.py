@@ -4,6 +4,7 @@ from cloudmesh.common.console import Console
 from cloudmesh.common.systeminfo import os_is_linux
 from cloudmesh.common.systeminfo import os_is_mac
 from cloudmesh.common.util import banner
+from cloudmesh.common.util import path_expand
 
 
 # adjust this accordingly
@@ -37,10 +38,10 @@ elif target == "ruoshen":
     ESAT="C:/Users/bill_/esat"
     EDITOR="???"
 elif target == "gregor-linux":
-    BASE="/scratch"
-    DATA_DIR="/nfs/flash/mlcommons/data"
-    PROJECT_SRC=f"{BASE}/mlcommons/src"
-    PROJECT=f"{PROJECT_SRC}/mlcommons"
+    BASE="/nfs/flash/mlcommons"
+    DATA_DIR=f"{BASE}/data"
+    PROJECT_SRC=f"{BASE}/mlcommons/benchmarks/cloudmask/"
+    PROJECT = f"{PROJECT_SRC}/target/greene_v0.5/project"
     ESAT="~/.esat"
     EDITOR="emacs"
 elif target == "gregor-mac":
@@ -60,10 +61,21 @@ def get_var_name(var):
             return name
     return None
 
-def print_var(v, n=15):
+def print_var(v, n=15, exists=""):
     name = get_var_name(v)
-    print(f"{name.ljust(n)}: {v}")
+    print(f"{name.ljust(n)}: {v} {exists}")
 
 banner("ENVIRONMENT")
 for v in [target,BASE,DATA_DIR,PROJECT_SRC,PROJECT,ESAT]:
-    print_var(v)
+    exists = ""
+    if v not in [target]:
+        if not os.path.exists(path_expand(v)):
+            exists = ". does not exist."
+    print_var(v, exists=exists)
+
+from cloudmesh.common.Shell import Shell
+count = Shell.count_files(PROJECT, recursive=False)
+print(f"Files in PROJECT: {count}")
+
+count = Shell.count_files(DATA_DIR, recursive=True)
+print(f"Files in DATA_DIR (recursive): {count}")
